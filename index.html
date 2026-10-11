@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>EduNova — Learn Today. Build Tomorrow.</title>
+  <meta name="description" content="EduNova is a modern online learning platform for programming, web development, AI and design. Master in-demand technology skills, build real-world projects, and turn your curiosity into a career.">
+  <meta name="theme-color" content="#0A1128">
+  <meta name="author" content="EduNova">
+
+  <!-- Social sharing metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EduNova">
+  <meta property="og:title" content="EduNova — Learn Today. Build Tomorrow.">
+  <meta property="og:description" content="Master in-demand technology skills, build real-world projects, and turn your curiosity into a career.">
+  <meta property="og:image" content="assets/img/hero-student-coding.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EduNova — Learn Today. Build Tomorrow.">
+  <meta name="twitter:description" content="Hands-on courses, guided learning paths and a supportive student community.">
+  <meta name="twitter:image" content="assets/img/hero-student-coding.webp">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 (CSS only — all interactivity is hand-written vanilla JS) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Flag JS availability so reveal animations never hide content when scripts fail -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+
+<body>
+  <!-- Reusable SVG symbols (logo mark) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="logo-mark" viewBox="0 0 64 64">
+      <defs>
+        <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#5B21D6"/>
+          <stop offset=".55" stop-color="#7C4DFF"/>
+          <stop offset="1" stop-color="#22D3EE"/>
+        </linearGradient>
+      </defs>
+      <rect width="64" height="64" rx="16" fill="url(#logoGrad)"/>
+      <path d="M32 15 55 25.5 32 36 9 25.5Z" fill="#FFFFFF"/>
+      <path d="M19 31.5v7.2c0 3.6 5.8 6.5 13 6.5s13-2.9 13-6.5v-7.2L32 37.4Z" fill="#FFFFFF" opacity=".88"/>
+      <path d="M52.5 27.5v9.5" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="52.5" cy="40.5" r="3.2" fill="#0A1128"/>
+      <path d="M27.5 50.5 24 54l3.5 3.5M36.5 50.5 40 54l-3.5 3.5" stroke="#0A1128" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/>
+    </symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ============================= HEADER ============================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <nav class="navbar-main container-xxl" aria-label="Primary">
+      <a class="brand" href="#home" aria-label="EduNova — back to top">
+        <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#logo-mark"></use></svg>
+        <span class="brand-name">Edu<span class="brand-accent">Nova</span></span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-item is-active" aria-current="page">Home</a></li>
+        <li><a href="#courses" class="nav-item">Courses</a></li>
+        <li><a href="#about" class="nav-item">About</a></li>
+        <li><a href="#learning-paths" class="nav-item">Learning Paths</a></li>
+        <li><a href="#contact" class="nav-item">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="searchToggle" type="button" aria-expanded="false" aria-controls="searchPanel" aria-label="Search courses">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-ghost d-none d-md-inline-flex" id="signInBtn" type="button">Sign In</button>
+        <button class="btn btn-brand d-none d-md-inline-flex" id="getStartedBtn" type="button">Get Started</button>
+        <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Expandable search panel (shared by desktop + mobile) -->
+    <div class="search-panel" id="searchPanel">
+      <form class="search-form container-xxl" id="navSearchForm" role="search">
+        <label class="visually-hidden" for="navSearchInput">Search courses</label>
+        <i class="bi bi-search" aria-hidden="true"></i>
+        <input type="search" id="navSearchInput" name="q" placeholder="Search courses, e.g. “python” or “design”" autocomplete="off">
+        <button class="btn btn-brand btn-sm" type="submit">Search</button>
+      </form>
+    </div>
+
+    <!-- Mobile navigation -->
+    <div class="mobile-menu" id="mobileMenu">
+      <nav class="container-xxl" aria-label="Mobile">
+        <ul class="mobile-links">
+          <li><a href="#home" class="mobile-link">Home</a></li>
+          <li><a href="#courses" class="mobile-link">Courses</a></li>
+          <li><a href="#about" class="mobile-link">About</a></li>
+          <li><a href="#learning-paths" class="mobile-link">Learning Paths</a></li>
+          <li><a href="#contact" class="mobile-link">Contact</a></li>
+        </ul>
+        <div class="mobile-menu-actions">
+          <button class="btn btn-ghost" id="signInBtnMobile" type="button">Sign In</button>
+          <button class="btn btn-brand" id="getStartedBtnMobile" type="button">Get Started</button>
+        </div>
+      </nav>
+    </div>
+    <div class="menu-backdrop" id="menuBackdrop" hidden></div>
+  </header>
+
+  <main id="main">
+    <!-- ============================= HERO ============================= -->
+    <section class="hero" id="home" aria-labelledby="heroTitle">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="hero-blob hero-blob-1"></span>
+        <span class="hero-blob hero-blob-2"></span>
+        <span class="hero-grid-lines"></span>
+      </div>
+
+      <div class="container-xxl hero-inner">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <p class="hero-badge reveal">
+              <span class="hero-badge-dot" aria-hidden="true"></span>
+              New: AI &amp; Machine Learning track for 2026
+            </p>
+            <h1 class="hero-title reveal" id="heroTitle" style="--reveal-delay:.08s">
+              Learn Today.<br>
+              <span class="text-gradient">Build Tomorrow.</span>
+            </h1>
+            <p class="hero-lead reveal" style="--reveal-delay:.16s">
+              Master in-demand technology skills, build real-world projects, and turn your
+              curiosity into a career.
+            </p>
+
+            <div class="hero-cta reveal" style="--reveal-delay:.24s">
+              <a class="btn btn-brand btn-lg" href="#courses">
+                Explore Courses <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </a>
+              <a class="btn btn-outline-light-custom btn-lg" href="#learning-paths">
+                <i class="bi bi-play-circle" aria-hidden="true"></i> Start Learning
+              </a>
+            </div>
+
+            <!-- Trust indicators -->
+            <div class="hero-trust reveal" style="--reveal-delay:.32s">
+              <div class="avatar-stack" aria-hidden="true">
+                <span class="avatar avatar-1">AK</span>
+                <span class="avatar avatar-2">JM</span>
+                <span class="avatar avatar-3">RS</span>
+                <span class="avatar avatar-4">+</span>
+              </div>
+              <div class="hero-trust-copy">
+                <strong>12,000+ curious students</strong>
+                <span>learning together in our community</span>
+              </div>
+              <ul class="hero-chips" aria-label="What learning at EduNova is like">
+                <li><i class="bi bi-tools" aria-hidden="true"></i> Practical, project-based</li>
+                <li><i class="bi bi-shield-check" aria-hidden="true"></i> Beginner friendly</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Hero visual composition -->
+          <div class="col-lg-6">
+            <div class="hero-visual reveal" style="--reveal-delay:.2s">
+              <div class="hero-frame">
+                <img src="assets/img/hero-student-coding.webp" width="900" height="1117"
+                     alt="Illustration of a student coding on a laptop surrounded by floating interface cards and progress rings"
+                     fetchpriority="high">
+              </div>
+
+              <!-- Floating code card -->
+              <div class="float-card float-card-code" aria-hidden="true">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <pre class="code-lines"><code><span class="c-purple">const</span> <span class="c-cyan">future</span> = <span class="c-fn">learn</span>(<span class="c-str">'today'</span>);
+<span class="c-cyan">future</span>.<span class="c-fn">build</span>().<span class="c-fn">ship</span>();</code></pre>
+              </div>
+
+              <!-- Floating progress card -->
+              <div class="float-card float-card-progress">
+                <svg class="progress-ring" viewBox="0 0 48 48" aria-hidden="true">
+                  <circle class="ring-track" cx="24" cy="24" r="20"></circle>
+                  <circle class="ring-value" cx="24" cy="24" r="20"></circle>
+                </svg>
+                <div>
+                  <strong>84% complete</strong>
+                  <span>JavaScript Essentials</span>
+                </div>
+              </div>
+
+              <!-- Floating certificate card -->
+              <div class="float-card float-card-badge">
+                <span class="badge-tile"><i class="bi bi-patch-check-fill" aria-hidden="true"></i></span>
+                <div>
+                  <strong>Certificate earned</strong>
+                  <span>Python for Beginners</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills marquee -->
+      <div class="marquee" aria-label="Skills you will practice at EduNova">
+        <div class="marquee-track">
+          <ul class="marquee-list">
+            <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Python</li><li>React</li>
+            <li>Node.js</li><li>Figma</li><li>TensorFlow</li><li>SQL</li><li>Git &amp; GitHub</li>
+          </ul>
+          <ul class="marquee-list" aria-hidden="true">
+            <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Python</li><li>React</li>
+            <li>Node.js</li><li>Figma</li><li>TensorFlow</li><li>SQL</li><li>Git &amp; GitHub</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= COURSES ============================= -->
+    <section class="section courses-section" id="courses" aria-labelledby="coursesTitle">
+      <div class="container-xxl">
+        <div class="section-head reveal">
+          <p class="eyebrow">Popular Courses</p>
+          <h2 id="coursesTitle">Courses designed to get you job&#8209;ready</h2>
+          <p class="section-lead">
+            Every course pairs short, focused lessons with hands-on projects you can put
+            straight into your portfolio.
+          </p>
+        </div>
+
+        <!-- Filters + search toolbar -->
+        <div class="courses-toolbar reveal" style="--reveal-delay:.1s">
+          <div class="filter-group" role="group" aria-label="Filter courses by category">
+            <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" type="button" data-filter="development" aria-pressed="false">Development</button>
+            <button class="filter-btn" type="button" data-filter="design" aria-pressed="false">Design</button>
+            <button class="filter-btn" type="button" data-filter="data" aria-pressed="false">Data Science</button>
+          </div>
+
+          <div class="course-search">
+            <label class="visually-hidden" for="courseSearch">Search courses by title or topic</label>
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <input type="search" id="courseSearch" placeholder="Search by title or topic…" autocomplete="off">
+            <button class="search-clear" id="courseSearchClear" type="button" aria-label="Clear course search" hidden>
+              <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <p class="courses-count" id="coursesCount" role="status" aria-live="polite">Showing 6 of 6 courses</p>
+
+        <div class="row g-4" id="courseGrid">
+          <!-- 1 · Web Development -->
+          <div class="col-12 col-sm-6 col-lg-4 course-col reveal" data-category="development">
+            <article class="course-card">
+              <div class="course-media">
+                <img src="assets/img/course-web-development.webp" width="800" height="597" loading="lazy"
+                     alt="Abstract 3D browser window with layout blocks representing web development">
+                <span class="course-tag">Development</span>
+                <span class="course-level level-beginner">Beginner</span>
+              </div>
+              <div class="course-body">
+                <h3 class="course-title">Web Development</h3>
+                <p class="course-desc">HTML, CSS and responsive layout fundamentals — finish by publishing your first real website.</p>
+                <ul class="course-meta">
+                  <li><i class="bi bi-clock-history" aria-hidden="true"></i> 12 weeks</li>
+                  <li><i class="bi bi-collection-play" aria-hidden="true"></i> 48 lessons</li>
+                </ul>
+              </div>
+              <div class="course-foot">
+                <span class="course-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 4.8 <span class="rating-count">(2,340)</span></span>
+                <button class="btn btn-outline-brand btn-view" type="button" data-course="web-development">
+                  View Course <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- 2 · JavaScript Programming -->
+          <div class="col-12 col-sm-6 col-lg-4 course-col reveal" data-category="development" style="--reveal-delay:.08s">
+            <article class="course-card">
+              <div class="course-media">
+                <img src="assets/img/course-javascript.webp" width="800" height="600" loading="lazy"
+                     alt="Glowing curly braces and light ribbons representing JavaScript programming">
+                <span class="course-tag">Development</span>
+                <span class="course-level level-intermediate">Intermediate</span>
+              </div>
+              <div class="course-body">
+                <h3 class="course-title">JavaScript Programming</h3>
+                <p class="course-desc">From variables to async APIs — write modern JavaScript and build interactive interfaces.</p>
+                <ul class="course-meta">
+                  <li><i class="bi bi-clock-history" aria-hidden="true"></i> 10 weeks</li>
+                  <li><i class="bi bi-collection-play" aria-hidden="true"></i> 42 lessons</li>
+                </ul>
+              </div>
+              <div class="course-foot">
+                <span class="course-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 4.9 <span class="rating-count">(1,875)</span></span>
+                <button class="btn btn-outline-brand btn-view" type="button" data-course="javascript">
+                  View Course <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- 3 · Python for Beginners -->
+          <div class="col-12 col-sm-6 col-lg-4 course-col reveal" data-category="development" style="--reveal-delay:.16s">
+            <article class="course-card">
+              <div class="course-media">
+                <img src="assets/img/course-python.webp" width="800" height="597" loading="lazy"
+                     alt="Two intertwined glossy ribbons forming an abstract spiral representing Python">
+                <span class="course-tag">Development</span>
+                <span class="course-level level-beginner">Beginner</span>
+              </div>
+              <div class="course-body">
+                <h3 class="course-title">Python for Beginners</h3>
+                <p class="course-desc">A gentle, friendly start to programming: logic, loops and small automation projects.</p>
+                <ul class="course-meta">
+                  <li><i class="bi bi-clock-history" aria-hidden="true"></i> 8 weeks</li>
+                  <li><i class="bi bi-collection-play" aria-hidden="true"></i> 36 lessons</li>
+                </ul>
+              </div>
+              <div class="course-foot">
+                <span class="course-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 4.8 <span class="rating-count">(3,120)</span></span>
+                <button class="btn btn-outline-brand btn-view" type="button" data-course="python">
+                  View Course <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- 4 · Artificial Intelligence -->
+          <div class="col-12 col-sm-6 col-lg-4 course-col reveal" data-category="data">
+            <article class="course-card">
+              <div class="course-media">
+                <img src="assets/img/course-artificial-intelligence.webp" width="800" height="597" loading="lazy"
+                     alt="Glowing neural network sphere representing artificial intelligence">
+                <span class="course-tag">Data Science</span>
+                <span class="course-level level-intermediate">Intermediate</span>
+              </div>
+              <div class="course-body">
+                <h3 class="course-title">Artificial Intelligence</h3>
+                <p class="course-desc">Understand how modern AI works, then train and evaluate your first machine-learning models.</p>
+                <ul class="course-meta">
+                  <li><i class="bi bi-clock-history" aria-hidden="true"></i> 14 weeks</li>
+                  <li><i class="bi bi-collection-play" aria-hidden="true"></i> 52 lessons</li>
+                </ul>
+              </div>
+              <div class="course-foot">
+                <span class="course-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 4.7 <span class="rating-count">(980)</span></span>
+                <button class="btn btn-outline-brand btn-view" type="button" data-course="ai">
+                  View Course <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- 5 · UI/UX Design -->
+          <div class="col-12 col-sm-6 col-lg-4 course-col reveal" data-category="design" style="--reveal-delay:.08s">
+            <article class="course-card">
+              <div class="course-media">
+                <img src="assets/img/course-uiux-design.webp" width="800" height="597" loading="lazy"
+                     alt="Floating design tool panels, colour swatches and a bezier curve representing UI and UX design">
+                <span class="course-tag">Design</span>
+                <span class="course-level level-beginner">Beginner</span>
+              </div>
+              <div class="course-body">
+                <h3 class="course-title">UI/UX Design</h3>
+                <p class="course-desc">Design thinking, wireframes and polished prototypes in Figma — tested with real users.</p>
+                <ul class="course-meta">
+                  <li><i class="bi bi-clock-history" aria-hidden="true"></i> 9 weeks</li>
+                  <li><i class="bi bi-collection-play" aria-hidden="true"></i> 30 lessons</li>
+                </ul>
+              </div>
+              <div class="course-foot">
+                <span class="course-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 4.9 <span class="rating-count">(1,410)</span></span>
+                <button class="btn btn-outline-brand btn-view" type="button" data-course="uiux">
+                  View Course <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- 6 · Data Science -->
+          <div class="col-12 col-sm-6 col-lg-4 course-col reveal" data-category="data" style="--reveal-delay:.16s">
+            <article class="course-card">
+              <div class="course-media">
+                <img src="assets/img/course-data-science.webp" width="800" height="597" loading="lazy"
+                     alt="Holographic 3D bar chart with a rising trend line representing data science">
+                <span class="course-tag">Data Science</span>
+                <span class="course-level level-intermediate">Intermediate</span>
+              </div>
+              <div class="course-body">
+                <h3 class="course-title">Data Science</h3>
+                <p class="course-desc">Clean, analyse and visualise real datasets, then communicate insights people act on.</p>
+                <ul class="course-meta">
+                  <li><i class="bi bi-clock-history" aria-hidden="true"></i> 12 weeks</li>
+                  <li><i class="bi bi-collection-play" aria-hidden="true"></i> 46 lessons</li>
+                </ul>
+              </div>
+              <div class="course-foot">
+                <span class="course-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 4.8 <span class="rating-count">(1,265)</span></span>
+                <button class="btn btn-outline-brand btn-view" type="button" data-course="data-science">
+                  View Course <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Empty state for filter + search combinations with no results -->
+        <div class="courses-empty" id="coursesEmpty" hidden>
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <h3>No courses found</h3>
+          <p>We couldn't find a course matching your filters. Try a different keyword or category.</p>
+          <button class="btn btn-brand" id="resetFilters" type="button">Reset filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= LEARNING PATHS ============================= -->
+    <section class="section paths-section" id="learning-paths" aria-labelledby="pathsTitle">
+      <div class="container-xxl">
+        <div class="section-head reveal">
+          <p class="eyebrow">Learning Paths</p>
+          <h2 id="pathsTitle">Follow a guided route from zero to hired</h2>
+          <p class="section-lead">
+            Not sure where to start? Each path stacks the right courses, projects and
+            milestones in the right order.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-xl-3 reveal">
+            <article class="path-card">
+              <header class="path-head">
+                <span class="path-icon"><i class="bi bi-window-desktop" aria-hidden="true"></i></span>
+                <div>
+                  <h3>Frontend Developer</h3>
+                  <p class="path-meta">6 months · Beginner friendly</p>
+                </div>
+              </header>
+              <ol class="path-steps">
+                <li>HTML &amp; CSS foundations</li>
+                <li>JavaScript essentials</li>
+                <li>React &amp; modern tooling</li>
+                <li>Portfolio &amp; deployment</li>
+              </ol>
+              <button class="btn btn-soft path-btn" type="button" data-path-filter="development" data-path-name="Frontend Developer">
+                Start this path <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </button>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 col-xl-3 reveal" style="--reveal-delay:.08s">
+            <article class="path-card">
+              <header class="path-head">
+                <span class="path-icon"><i class="bi bi-hdd-stack" aria-hidden="true"></i></span>
+                <div>
+                  <h3>Full-Stack Developer</h3>
+                  <p class="path-meta">9 months · Some coding helpful</p>
+                </div>
+              </header>
+              <ol class="path-steps">
+                <li>Frontend fundamentals</li>
+                <li>APIs with Node.js</li>
+                <li>Databases &amp; authentication</li>
+                <li>Capstone product build</li>
+              </ol>
+              <button class="btn btn-soft path-btn" type="button" data-path-filter="development" data-path-name="Full-Stack Developer">
+                Start this path <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </button>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 col-xl-3 reveal" style="--reveal-delay:.16s">
+            <article class="path-card">
+              <header class="path-head">
+                <span class="path-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+                <div>
+                  <h3>AI &amp; ML Beginner</h3>
+                  <p class="path-meta">8 months · Maths comfort helpful</p>
+                </div>
+              </header>
+              <ol class="path-steps">
+                <li>Python basics</li>
+                <li>Data wrangling &amp; stats</li>
+                <li>Machine-learning core</li>
+                <li>Ship an ML project</li>
+              </ol>
+              <button class="btn btn-soft path-btn" type="button" data-path-filter="data" data-path-name="AI &amp; ML Beginner">
+                Start this path <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </button>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 col-xl-3 reveal" style="--reveal-delay:.24s">
+            <article class="path-card">
+              <header class="path-head">
+                <span class="path-icon"><i class="bi bi-vector-pen" aria-hidden="true"></i></span>
+                <div>
+                  <h3>UI/UX Designer</h3>
+                  <p class="path-meta">5 months · No experience needed</p>
+                </div>
+              </header>
+              <ol class="path-steps">
+                <li>Design thinking</li>
+                <li>Figma &amp; prototyping</li>
+                <li>Usability testing</li>
+                <li>Case-study portfolio</li>
+              </ol>
+              <button class="btn btn-soft path-btn" type="button" data-path-filter="design" data-path-name="UI/UX Designer">
+                Start this path <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= WHY EDUNOVA ============================= -->
+    <section class="section features-section" id="about" aria-labelledby="featuresTitle">
+      <div class="container-xxl">
+        <div class="section-head reveal">
+          <p class="eyebrow">Why Choose EduNova?</p>
+          <h2 id="featuresTitle">A learning experience built around you</h2>
+          <p class="section-lead">
+            We designed EduNova for busy students: flexible enough for real life,
+            structured enough to actually finish.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-sm-6 col-lg-3 reveal">
+            <article class="feature-card">
+              <span class="feature-icon"><i class="bi bi-clock-history" aria-hidden="true"></i></span>
+              <h3>Learn at Your Own Pace</h3>
+              <p>Bite-size lessons and lifetime access mean you can study between classes, work or family — and pick up exactly where you left off.</p>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3 reveal" style="--reveal-delay:.08s">
+            <article class="feature-card">
+              <span class="feature-icon"><i class="bi bi-kanban" aria-hidden="true"></i></span>
+              <h3>Project-Based Learning</h3>
+              <p>Every module ends with something you built yourself. Graduate with a portfolio of real projects, not just certificates.</p>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3 reveal" style="--reveal-delay:.16s">
+            <article class="feature-card">
+              <span class="feature-icon"><i class="bi bi-briefcase" aria-hidden="true"></i></span>
+              <h3>Industry-Relevant Skills</h3>
+              <p>Curricula are mapped to the tools and workflows teams actually use today, reviewed every term to stay current.</p>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3 reveal" style="--reveal-delay:.24s">
+            <article class="feature-card">
+              <span class="feature-icon"><i class="bi bi-graph-up-arrow" aria-hidden="true"></i></span>
+              <h3>Track Your Progress</h3>
+              <p>Streaks, skill maps and milestone badges show how far you've come — and what to tackle next.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= STATS ============================= -->
+    <section class="section stats-section" aria-labelledby="statsTitle">
+      <div class="container-xxl">
+        <p class="stats-kicker reveal">EduNova in numbers</p>
+        <h2 class="visually-hidden" id="statsTitle">Illustrative platform statistics</h2>
+
+        <div class="row g-4 stats-grid">
+          <div class="col-6 col-lg-3 reveal">
+            <div class="stat">
+              <span class="stat-value" data-count="12400" data-suffix="+">0</span>
+              <span class="stat-label">Active learners</span>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3 reveal" style="--reveal-delay:.08s">
+            <div class="stat">
+              <span class="stat-value" data-count="48">0</span>
+              <span class="stat-label">Hands-on courses</span>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3 reveal" style="--reveal-delay:.16s">
+            <div class="stat">
+              <span class="stat-value" data-count="1250" data-suffix="+">0</span>
+              <span class="stat-label">Student projects shipped</span>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3 reveal" style="--reveal-delay:.24s">
+            <div class="stat">
+              <span class="stat-value" data-count="94" data-suffix="%">0</span>
+              <span class="stat-label">Feel more confident coding</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="stats-disclaimer reveal">
+          <i class="bi bi-info-circle" aria-hidden="true"></i>
+          Illustrative demo figures for this portfolio project — not verified statistics.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================= TESTIMONIALS ============================= -->
+    <section class="section testimonials-section" aria-labelledby="testimonialsTitle">
+      <div class="container-xxl">
+        <div class="section-head reveal">
+          <p class="eyebrow">Student Stories</p>
+          <h2 id="testimonialsTitle">Learners who turned curiosity into momentum</h2>
+          <p class="section-lead">Sample testimonials written for this demo — swap in your own student stories.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-lg-4 reveal">
+            <figure class="testimonial-card">
+              <i class="bi bi-quote quote-mark" aria-hidden="true"></i>
+              <div class="stars" role="img" aria-label="Rated 5 out of 5">
+                <i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i>
+              </div>
+              <blockquote>
+                <p>I'd tried three other platforms before EduNova. The project-first approach is what finally made concepts stick — I shipped my first portfolio site in week five.</p>
+              </blockquote>
+              <figcaption class="testimonial-person">
+                <span class="avatar avatar-1" aria-hidden="true">AK</span>
+                <div>
+                  <strong>Amina K.</strong>
+                  <span>Frontend Developer path · Sample student</span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4 reveal" style="--reveal-delay:.08s">
+            <figure class="testimonial-card">
+              <i class="bi bi-quote quote-mark" aria-hidden="true"></i>
+              <div class="stars" role="img" aria-label="Rated 5 out of 5">
+                <i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i>
+              </div>
+              <blockquote>
+                <p>The learning path removed all the guesswork. I always knew what to study next, and the progress dashboard kept me honest about my streak.</p>
+              </blockquote>
+              <figcaption class="testimonial-person">
+                <span class="avatar avatar-2" aria-hidden="true">JM</span>
+                <div>
+                  <strong>Jonas M.</strong>
+                  <span>Data Science course · Sample student</span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4 reveal" style="--reveal-delay:.16s">
+            <figure class="testimonial-card">
+              <i class="bi bi-quote quote-mark" aria-hidden="true"></i>
+              <div class="stars" role="img" aria-label="Rated 5 out of 5">
+                <i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-half" aria-hidden="true"></i>
+              </div>
+              <blockquote>
+                <p>As a career switcher I needed structure and encouragement. The community reviews on my UI case studies were honestly the most valuable part.</p>
+              </blockquote>
+              <figcaption class="testimonial-person">
+                <span class="avatar avatar-3" aria-hidden="true">RS</span>
+                <div>
+                  <strong>Priya R.</strong>
+                  <span>UI/UX Designer path · Sample student</span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= CTA ============================= -->
+    <section class="cta-section" aria-labelledby="ctaTitle">
+      <div class="container-xxl">
+        <div class="cta-card reveal">
+          <span class="cta-glow cta-glow-1" aria-hidden="true"></span>
+          <span class="cta-glow cta-glow-2" aria-hidden="true"></span>
+          <h2 id="ctaTitle">Your Future in Tech Starts Here.</h2>
+          <p>
+            You don't need a perfect plan — you need a first step. Pick a course, build
+            something small this week, and let the momentum carry you forward.
+          </p>
+          <div class="cta-actions">
+            <a class="btn btn-light-custom btn-lg" href="#courses">
+              Start Learning <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a class="btn btn-outline-light-custom btn-lg" href="#learning-paths">Browse learning paths</a>
+          </div>
+          <p class="cta-note">Free to explore · No credit card needed · Demo project</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= NEWSLETTER / CONTACT ============================= -->
+    <section class="section newsletter-section" id="contact" aria-labelledby="newsletterTitle">
+      <div class="container-xxl">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-6 reveal">
+            <p class="eyebrow">Stay in the loop</p>
+            <h2 id="newsletterTitle">New courses, free workshops &amp; study tips</h2>
+            <p class="section-lead mb-4">
+              One thoughtful email a month: what's new on the platform, free live
+              workshops, and practical advice for learning to code.
+            </p>
+            <ul class="contact-list">
+              <li><i class="bi bi-envelope" aria-hidden="true"></i> hello@edunova.example</li>
+              <li><i class="bi bi-geo-alt" aria-hidden="true"></i> Fully online — learn from anywhere</li>
+              <li><i class="bi bi-chat-dots" aria-hidden="true"></i> Community support, Monday to Friday</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6 reveal" style="--reveal-delay:.1s">
+            <form class="newsletter-card" id="newsletterForm" novalidate>
+              <h3>Join the EduNova newsletter</h3>
+              <div class="field">
+                <label for="newsletterEmail">Email address</label>
+                <div class="input-wrap">
+                  <i class="bi bi-envelope" aria-hidden="true"></i>
+                  <input type="email" id="newsletterEmail" name="email" placeholder="you@example.com"
+                         autocomplete="email" required aria-describedby="newsletterFeedback newsletterHint">
+                </div>
+                <p class="form-feedback" id="newsletterFeedback" role="status" aria-live="polite"></p>
+              </div>
+              <button class="btn btn-brand btn-lg w-100" type="submit" id="newsletterSubmit">
+                Subscribe <i class="bi bi-send" aria-hidden="true"></i>
+              </button>
+              <p class="form-hint" id="newsletterHint">
+                <i class="bi bi-info-circle" aria-hidden="true"></i>
+                Demo form — nothing is sent or stored. A real subscription needs backend integration.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================= FOOTER ============================= -->
+  <footer class="site-footer">
+    <div class="container-xxl">
+      <div class="row g-5 footer-grid">
+        <div class="col-lg-4">
+          <a class="brand brand-footer" href="#home">
+            <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#logo-mark"></use></svg>
+            <span class="brand-name">Edu<span class="brand-accent">Nova</span></span>
+          </a>
+          <p class="footer-desc">
+            EduNova helps curious students learn programming, design and data skills
+            through hands-on courses and guided learning paths. Learn today, build tomorrow.
+          </p>
+          <ul class="social-list" aria-label="EduNova on social media">
+            <li><a href="#" class="social-link" data-social="Twitter / X" aria-label="EduNova on Twitter or X (placeholder)"><i class="bi bi-twitter-x" aria-hidden="true"></i></a></li>
+            <li><a href="#" class="social-link" data-social="LinkedIn" aria-label="EduNova on LinkedIn (placeholder)"><i class="bi bi-linkedin" aria-hidden="true"></i></a></li>
+            <li><a href="#" class="social-link" data-social="YouTube" aria-label="EduNova on YouTube (placeholder)"><i class="bi bi-youtube" aria-hidden="true"></i></a></li>
+            <li><a href="#" class="social-link" data-social="GitHub" aria-label="EduNova on GitHub (placeholder)"><i class="bi bi-github" aria-hidden="true"></i></a></li>
+            <li><a href="#" class="social-link" data-social="Instagram" aria-label="EduNova on Instagram (placeholder)"><i class="bi bi-instagram" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h3 class="footer-title">Explore</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#learning-paths">Learning Paths</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3">
+          <h3 class="footer-title">Course categories</h3>
+          <ul class="footer-links">
+            <li><a href="#courses" data-footer-filter="development">Web Development</a></li>
+            <li><a href="#courses" data-footer-filter="development">JavaScript &amp; Python</a></li>
+            <li><a href="#courses" data-footer-filter="data">AI &amp; Machine Learning</a></li>
+            <li><a href="#courses" data-footer-filter="data">Data Science</a></li>
+            <li><a href="#courses" data-footer-filter="design">UI/UX Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+          <h3 class="footer-title">Good to know</h3>
+          <ul class="footer-links">
+            <li><a href="#courses" data-footer-filter="all">All courses</a></li>
+            <li><a href="#contact">Newsletter</a></li>
+            <li><button class="footer-btn" type="button" id="footerDemoBtn">About this demo</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="mb-0">© <span id="currentYear">2026</span> EduNova. Built as a frontend demo — no backend, no tracking.</p>
+        <p class="mb-0 footer-tagline">Learn Today. Build Tomorrow.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <i class="bi bi-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Toast notifications -->
+  <div class="toast-region" id="toastRegion" role="status" aria-live="polite"></div>
+
+  <!-- ============================= COURSE MODAL ============================= -->
+  <div class="modal-overlay" id="courseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close course details">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+      <div class="modal-media">
+        <img id="modalImg" src="" alt="" width="800" height="597">
+      </div>
+      <div class="modal-body">
+        <div class="modal-tags">
+          <span class="course-tag" id="modalTag"></span>
+          <span class="course-level" id="modalLevel"></span>
+        </div>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc"></p>
+        <ul class="modal-meta" id="modalMeta"></ul>
+        <h4 class="modal-subtitle">What you'll learn &amp; build</h4>
+        <ul class="modal-list" id="modalList"></ul>
+        <div class="modal-actions">
+          <button class="btn btn-brand" id="modalEnroll" type="button">Enroll — free preview</button>
+          <button class="btn btn-ghost" id="modalSyllabus" type="button">
+            <i class="bi bi-file-earmark-arrow-down" aria-hidden="true"></i> Syllabus
+          </button>
+        </div>
+        <p class="modal-note">
+          <i class="bi bi-info-circle" aria-hidden="true"></i>
+          Demo content: enrollment and downloads require a backend integration.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================= SIGN-UP MODAL ============================= -->
+  <div class="modal-overlay" id="signupModal" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
+    <div class="modal-card modal-card-sm">
+      <button class="modal-close" id="signupClose" type="button" aria-label="Close sign up dialog">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+      <div class="modal-body">
+        <span class="signup-mark"><i class="bi bi-rocket-takeoff" aria-hidden="true"></i></span>
+        <h3 id="signupTitle">Create your free account</h3>
+        <p class="modal-lead">Start your first course in minutes. This demo validates your details locally — nothing is sent anywhere.</p>
+        <form id="signupForm" novalidate>
+          <div class="field">
+            <label for="signupName">Full name</label>
+            <div class="input-wrap">
+              <i class="bi bi-person" aria-hidden="true"></i>
+              <input type="text" id="signupName" name="name" placeholder="Ada Lovelace" autocomplete="name" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="signupEmail">Email address</label>
+            <div class="input-wrap">
+              <i class="bi bi-envelope" aria-hidden="true"></i>
+              <input type="email" id="signupEmail" name="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+          </div>
+          <p class="form-feedback" id="signupFeedback" role="status" aria-live="polite"></p>
+          <button class="btn btn-brand btn-lg w-100" type="submit">Create account</button>
+        </form>
+        <div class="signup-success" id="signupSuccess" hidden>
+          <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+          <h4>You're on the list!</h4>
+          <p>In a production build this is where account creation would happen. For this demo, your details stay in your browser.</p>
+          <button class="btn btn-soft" id="signupSuccessClose" type="button">Continue exploring</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
